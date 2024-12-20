@@ -123,8 +123,11 @@ if name:
         text_chunks = pdf_to_text(document)
         # Create the full text content
         full_text = '\n\n\n'.join(text_chunks)
-        test = create_test(full_text) 
-        st.write(test)
+        test = []
+        for info in full_text:
+            question = create_test(info) 
+            st.write(question)
+            test.append(question)
         st.download_button(
             label="Download Text File",
             data = full_text,
