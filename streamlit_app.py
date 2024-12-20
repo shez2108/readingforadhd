@@ -124,6 +124,27 @@ def create_test(text):
         return questions
     except Exception as e:
         return f"Error creating test: {str(e)}"
+
+def split_for_claude(text, max_tokens=4096):
+    """Split text into chunks that fit within the token limit."""
+    words = text.split()
+    chunks = []
+    current_chunk = []
+    current_length = 0
+    
+    for word in words:
+        current_chunk.append(word)
+        current_length += len(word) + 1  # +1 for the space
+        
+        if current_length >= max_tokens:
+            chunks.append(' '.join(current_chunk))
+            current_chunk = []
+            current_length = 0
+    
+    if current_chunk:
+        chunks.append(' '.join(current_chunk))
+    
+    return chunks
     
 name = st.text_input("Enter the name of the book")
 if name:
@@ -135,8 +156,16 @@ if name:
         text_chunks = pdf_to_text(document)
         # Create the full text content
         full_text = '\n\n\n'.join(text_chunks)
-        test = create_test(full_text)
-        st.write(test)
+        # Split the full text into manageable chunks
+        text_segments = split_for_claude(full_text, max_tokens=200000)
+        
+        all_tests = []
+        for segment in text_segments:
+            test = create_test(segment)
+            all_tests.append(test)
+        
+        combined_tests = "\n\n".join(all_tests)
+        st.write(combined_tests)
         st.download_button(
             label="Download Text File",
             data = full_text,
@@ -145,7 +174,7 @@ if name:
         )
         st.download_button(
             label="Download Questions",
-            data = test,
+            data = all_tests,
             file_name = f'{name}_test.txt',
             mime="text/plain"
         )
