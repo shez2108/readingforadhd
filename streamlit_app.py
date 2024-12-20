@@ -102,16 +102,29 @@ def format_claude_response(response):
     return "No response to format"
     
 def create_test(text):
-    message = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
-            max_tokens=8192,
+    # Debug: Check if we have text
+    if not text:
+        return "No text provided to create test from"
+    
+    # Truncate text if it's too long (Claude has context limits)
+    max_length = 10000  # Adjust this value as needed
+    truncated_text = text[:max_length]
+    
+    try:
+        message = client.messages.create(
+            model="claude-3-sonnet",  # Updated model name
             messages=[
-                {"role": "user", "content": f"Hello, Claude. Give me a two-question test on this document {text}. No multiple choice or answers needed."}
+                {
+                    "role": "user", 
+                    "content": f"Based on the following text, create 2 questions to test comprehension (no answers needed):\n\n{truncated_text}"
+                }
             ]
         )
-    response = message.content
-    questions = format_claude_response(response)
-    return questions
+        
+        # The response is already a string, no need for complex formatting
+        return message.content
+    except Exception as e:
+        return f"Error creating test: {str(e)}"
     
 name = st.text_input("Enter the name of the book")
 if name:
@@ -123,11 +136,7 @@ if name:
         text_chunks = pdf_to_text(document)
         # Create the full text content
         full_text = '\n\n\n'.join(text_chunks)
-        test = []
-        for info in full_text:
-            question = create_test(info) 
-            st.write(question)
-            test.append(question)
+        test = create_test(full_text)
         st.download_button(
             label="Download Text File",
             data = full_text,
