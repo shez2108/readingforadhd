@@ -108,7 +108,7 @@ def create_test(text):
     
     try:
         message = client.messages.create(
-            model="claude-3-sonnet-20241022",
+            model="claude-3-5-sonnet-20241022",
             max_tokens=1024,#
             messages=[
                 {
