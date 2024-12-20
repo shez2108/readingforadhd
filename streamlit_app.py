@@ -5,9 +5,7 @@ import os
 import anthropic
 
 st.title("ADHD Reader")
-st.write(
-    "Input a PDF and let the app chunk it up!"
-)
+
 
 st.write(
     """
@@ -17,6 +15,10 @@ st.write(
     *Note: This is specifically built for handling PDFs. It divides the text into chunks and increases the space between those chunks, with the aim of making it easier to digest words on the page. 
     It also prints a test for you to make sure you're keeping sufficient track of the book's narrative. You must save the result and export it to your Kindle app.**
     """
+)
+
+st.write(
+    "Input a PDF and let's chunk it up!"
 )
 
 # Near the top of your file, after imports
