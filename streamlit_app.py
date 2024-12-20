@@ -12,8 +12,6 @@ st.write(
     #### Do you have trouble reading eBooks from your Kindle?
     #### Do you find that your eyes can't help moving across the page?
     #### Or that the content you're reading goes in one ear then out the other?
-    *Note: This is specifically built for handling PDFs. It divides the text into chunks and increases the space between those chunks, with the aim of making it easier to digest words on the page. 
-    It also prints a test for you to make sure you're keeping sufficient track of the book's narrative. You must save the result and export it to your Kindle app.*
     """
 )
 
