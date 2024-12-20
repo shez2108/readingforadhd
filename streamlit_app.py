@@ -9,6 +9,10 @@ st.write(
     "Input a PDF and let the app chunk it up!"
 )
 
+# Remove the hardcoded API key
+client = anthropic.Anthropic(
+    api_key = st.secrets["ANTHROPIC_API_KEY"]
+)
 
 def clean_text(text):
     """Clean and format extracted text."""
@@ -58,12 +62,20 @@ def pdf_to_text(file, text_path=None):
 
     return all_text
 
+message = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=8192,
+    messages=[
+        {"role": "user", "content": "Hello, Claude. Give me a test on this document.}
+    ]
+)
 name = st.text_input("Enter the name of the book")
 if name:
     name = name.replace(' ', '_').lower()
     document = st.file_uploader("Import a PDF", type="pdf")
     convert_button = st.button("Convert!")
     if convert_button:
+        st.write(message.content)
         st.write("Button Clicked!")
         text_chunks = pdf_to_text(document)
         # Create the full text content
