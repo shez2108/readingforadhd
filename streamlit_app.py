@@ -18,7 +18,7 @@ st.write(
 )
 
 st.write(
-    "Input a PDF and let's chunk it up!"
+    "Name the text, input a PDF and let's chunk it up!"
 )
 
 # Near the top of your file, after imports
