@@ -115,10 +115,16 @@ if name:
         # Create the full text content
         full_text = '\n\n\n'.join(text_chunks)
         test = create_test(full_text) 
-        st.write('Here are your test questions:', test)
+        st.write(test)
         st.download_button(
             label="Download Text File",
             data = full_text,
             file_name = f'{name}.txt',
+            mime="text/plain"
+        )
+        st.download_button(
+            label="Download Questions",
+            data = test,
+            file_name = f'{name}_test.txt',
             mime="text/plain"
         )
