@@ -174,7 +174,7 @@ if name:
         )
         st.download_button(
             label="Download Questions",
-            data = all_tests,
+            data = combined_tests,
             file_name = f'{name}_test.txt',
             mime="text/plain"
         )
