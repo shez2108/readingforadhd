@@ -75,7 +75,8 @@ if name:
     document = st.file_uploader("Import a PDF", type="pdf")
     convert_button = st.button("Convert!")
     if convert_button:
-        st.write(message.content)
+        st.write("API Key available:", "ANTHROPIC_API_KEY" in st.secrets)
+        #st.write(message.content)
         st.write("Button Clicked!")
         text_chunks = pdf_to_text(document)
         # Create the full text content
