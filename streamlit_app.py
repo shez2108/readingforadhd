@@ -2,6 +2,7 @@ import streamlit as st
 import pypdf
 import re
 import os
+import anthropic
 
 st.title("ADHD Reader")
 st.write(
