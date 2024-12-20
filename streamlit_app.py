@@ -12,7 +12,6 @@ st.write(
 # Near the top of your file, after imports
 try:
     api_key = st.secrets["ANTHROPIC_API_KEY"]
-    st.write("Anthropic API key in use")  # Shows just the beginning to verify
     
     client = anthropic.Anthropic(
         api_key=api_key
