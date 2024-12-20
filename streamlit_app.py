@@ -76,18 +76,18 @@ if name:
     document = st.file_uploader("Import a PDF", type="pdf")
     convert_button = st.button("Convert!")
     if convert_button:
-        message = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
-            max_tokens=8192,
-            messages=[
-                {"role": "user", "content": "Hello, Claude. Give me a test on this document."}
-            ]
-        )
-        st.write(message.content)
         st.write("Button Clicked!")
         text_chunks = pdf_to_text(document)
         # Create the full text content
         full_text = '\n\n\n'.join(text_chunks)
+        message = client.messages.create(
+            model="claude-3-5-sonnet-20241022",
+            max_tokens=8192,
+            messages=[
+                {"role": "user", "content": f"Hello, Claude. Give me a test on the chapters this document {full_text}."}
+            ]
+        )
+        st.write(message.content)
         st.download_button(
             label="Download Text File",
             data = full_text,
