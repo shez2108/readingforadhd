@@ -9,10 +9,17 @@ st.write(
     "Input a PDF and let the app chunk it up!"
 )
 
-# Remove the hardcoded API key
-client = anthropic.Anthropic(
+# Near the top of your file, after imports
+try:
     api_key = st.secrets["ANTHROPIC_API_KEY"]
-)
+    st.write("API key starts with:", api_key[:12] + "...")  # Shows just the beginning to verify
+    
+    client = anthropic.Anthropic(
+        api_key=api_key
+    )
+except Exception as e:
+    st.error(f"Error setting up Anthropic client: {e}")
+    st.stop()  # Stop execution if we can't set up the client
 
 def clean_text(text):
     """Clean and format extracted text."""
@@ -75,7 +82,6 @@ if name:
     document = st.file_uploader("Import a PDF", type="pdf")
     convert_button = st.button("Convert!")
     if convert_button:
-        st.write("API Key available:", "ANTHROPIC_API_KEY" in st.secrets)
         #st.write(message.content)
         st.write("Button Clicked!")
         text_chunks = pdf_to_text(document)
