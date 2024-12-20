@@ -100,7 +100,7 @@ def create_test(text):
                 {"role": "user", "content": f"Hello, Claude. Give me a test on the chapters this document {full_text}."}
             ]
         )
-    questions = format_claude_response(message)
+    questions = format_claude_response(response=message)
     return questions
     
 name = st.text_input("Enter the name of the book")
