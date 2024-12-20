@@ -139,3 +139,10 @@ if name:
             file_name = f'{name}_test.txt',
             mime="text/plain"
         )
+
+st.write(
+    """
+    *Note: This is specifically built for handling PDFs. It divides the text into chunks and increases the space between those chunks, with the aim of making it easier to digest words on the page. 
+    It also prints a test for you to make sure you're keeping sufficient track of the book's narrative. You must save the result and export it to your Kindle app.*
+    """
+)
