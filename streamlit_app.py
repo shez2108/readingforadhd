@@ -137,6 +137,7 @@ if name:
         # Create the full text content
         full_text = '\n\n\n'.join(text_chunks)
         test = create_test(full_text)
+        st.write(test)
         st.download_button(
             label="Download Text File",
             data = full_text,
