@@ -106,7 +106,7 @@ def create_test(text):
             model="claude-3-5-sonnet-20241022",
             max_tokens=8192,
             messages=[
-                {"role": "user", "content": f"Hello, Claude. Give me a two-question test on this document {full_text}. No multiple choice or answers needed."}
+                {"role": "user", "content": f"Hello, Claude. Give me a two-question test on this document {text}. No multiple choice or answers needed."}
             ]
         )
     response = message.content
