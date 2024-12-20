@@ -106,23 +106,22 @@ def create_test(text):
     if not text:
         return "No text provided to create test from"
     
-    # Truncate text if it's too long (Claude has context limits)
-    max_length = 10000  # Adjust this value as needed
-    truncated_text = text[:max_length]
-    
     try:
         message = client.messages.create(
-            model="claude-3-sonnet",  # Updated model name
+            model="claude-3-sonnet-20241022",
+            max_tokens=1024,#
             messages=[
                 {
                     "role": "user", 
-                    "content": f"Based on the following text, create 2 questions to test comprehension (no answers needed):\n\n{truncated_text}"
+                    "content": f"Based on the following text, create 2 questions to test comprehension (no answers needed):{full_text}"
                 }
             ]
         )
         
         # The response is already a string, no need for complex formatting
-        return message.content
+        
+        questions = format_claude_response(message.content)
+        return questions
     except Exception as e:
         return f"Error creating test: {str(e)}"
     
