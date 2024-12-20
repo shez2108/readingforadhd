@@ -69,7 +69,40 @@ def pdf_to_text(file, text_path=None):
 
     return all_text
 
-
+def format_claude_response(response):
+    """Clean and format Claude's response for better display"""
+    # Extract the text from the TextBlock
+    if isinstance(response, list) and len(response) > 0:
+        # Get the raw text from the TextBlock
+        raw_text = response[0].text
+        
+        # Split into sections
+        sections = raw_text.split("\n\n")
+        
+        # Remove any introductory text
+        if "I'll create a test" in sections[0]:
+            sections = sections[1:]
+        
+        # Join with double newlines for better spacing
+        formatted_text = "\n\n".join(sections)
+        
+        # Remove extra quotes and escape characters
+        formatted_text = formatted_text.replace("\\n", "\n").replace("\"", "")
+        
+        return formatted_text
+    return "No response to format"
+    
+def create_test(text):
+    message = client.messages.create(
+            model="claude-3-5-sonnet-20241022",
+            max_tokens=8192,
+            messages=[
+                {"role": "user", "content": f"Hello, Claude. Give me a test on the chapters this document {full_text}."}
+            ]
+        )
+    questions = format_claude_response(message)
+    return questions
+    
 name = st.text_input("Enter the name of the book")
 if name:
     name = name.replace(' ', '_').lower()
@@ -80,14 +113,8 @@ if name:
         text_chunks = pdf_to_text(document)
         # Create the full text content
         full_text = '\n\n\n'.join(text_chunks)
-        message = client.messages.create(
-            model="claude-3-5-sonnet-20241022",
-            max_tokens=8192,
-            messages=[
-                {"role": "user", "content": f"Hello, Claude. Give me a test on the chapters this document {full_text}."}
-            ]
-        )
-        st.write(message.content)
+        test = create_test(full_text) 
+        st.write('Here are your test questions:', test)
         st.download_button(
             label="Download Text File",
             data = full_text,
