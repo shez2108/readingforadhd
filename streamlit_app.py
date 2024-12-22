@@ -174,7 +174,7 @@ if name:
         for segment in text_segments:
             test = create_test(segment)
             all_tests.append(test)
-            time.sleep(60)
+            time.sleep(120)
         
         combined_tests = "\n\n".join(all_tests)
         st.write(combined_tests)
