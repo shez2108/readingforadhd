@@ -126,7 +126,7 @@ def create_test(text):
     except Exception as e:
         return f"Error creating test: {str(e)}"
 
-def split_for_claude(text, max_tokens=180000):
+def split_for_claude(text, max_tokens=5000):
     """Split text into chunks that fit within Claude's context window.
     Reserves 20K tokens for Claude's response, using 180K max for input."""
     words = text.split()
@@ -159,7 +159,7 @@ if name:
         # Create the full text content
         full_text = '\n\n\n'.join(text_chunks)
         # Split the full text into manageable chunks
-        text_segments = split_for_claude(full_text, max_tokens=180000)
+        text_segments = split_for_claude(full_text, max_tokens=5000)
         st.write(len(text_segments))
         all_tests = []
         for segment in text_segments:
