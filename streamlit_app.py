@@ -166,7 +166,7 @@ if name:
         st.write("Button Clicked!")
         text_chunks = pdf_to_text(document)
         # Create the full text content
-        full_text = '\n\n\n'.join(text_chunks)
+        full_text = '\n\n'.join(text_chunks)
         # Split the full text into manageable chunks
         text_segments = split_for_claude(full_text, max_tokens=180000)
         st.write(len(text_segments))
