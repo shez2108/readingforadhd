@@ -125,29 +125,37 @@ def create_test(text):
         return questions
     except Exception as e:
         return f"Error creating test: {str(e)}"
-
+        
 def split_for_claude(text, max_tokens=200000):
-    """Split text into chunks that fit within Claude's context window.
-    Reserves 20K tokens for Claude's response, using 180K max for input."""
+    """
+    Split text into chunks that fit within Claude's token limit,
+    using the 3 characters ≈ 1 token approximation.
+    """
+    # Calculate approximate characters allowed (4 chars per token)
+    max_chars = max_tokens * 3
+    
     words = text.split()
     chunks = []
     current_chunk = []
     current_length = 0
     
     for word in words:
-        current_chunk.append(word)
-        current_length += len(word) + 1  # +1 for the space
+        word_length = len(word) + 1  # +1 for the space
+        estimated_tokens = word_length / 3  # Estimate tokens for this word
         
-        if current_length >= max_tokens:
+        if current_length + estimated_tokens > max_chars:
             chunks.append(' '.join(current_chunk))
-            current_chunk = []
-            current_length = 0
+            current_chunk = [word]
+            current_length = word_length
+        else:
+            current_chunk.append(word)
+            current_length += word_length
     
     if current_chunk:
         chunks.append(' '.join(current_chunk))
     
     return chunks
-    
+
 name = st.text_input("Enter the name of the book")
 if name:
     name = name.replace(' ', '_').lower()
