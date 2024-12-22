@@ -3,6 +3,7 @@ import pypdf
 import re
 import os
 import anthropic
+from transformers import GPT2Tokenizer
 
 st.title("ADHD Reader")
 
