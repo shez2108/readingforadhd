@@ -126,72 +126,23 @@ def create_test(text):
     except Exception as e:
         return f"Error creating test: {str(e)}"
 
-
-
-def split_for_claude(text, max_tokens=4096):
-    """
-    Split text into chunks that fit within Claude's token limit while preserving paragraph
-    and sentence structure for better comprehension question generation.
-    
-    Args:
-        text (str): The text to split
-        max_tokens (int): Maximum tokens per chunk
-    """
-    # Initialize tokenizer
-    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-    
-    # Split into paragraphs first
-    paragraphs = text.split('\n\n')
-    
+def split_for_claude(text, max_tokens=180000):
+    """Split text into chunks that fit within Claude's context window.
+    Reserves 20K tokens for Claude's response, using 180K max for input."""
+    words = text.split()
     chunks = []
     current_chunk = []
-    current_tokens = 0
+    current_length = 0
     
-    for paragraph in paragraphs:
-        # Split paragraph into sentences
-        sentences = re.split(r'(?<=[.!?])\s+', paragraph)
+    for word in words:
+        current_chunk.append(word)
+        current_length += len(word) + 1  # +1 for the space
         
-        for sentence in sentences:
-            sentence_tokens = tokenizer.encode(sentence)
-            sentence_token_count = len(sentence_tokens)
-            
-            # If single sentence exceeds token limit, split it
-            if sentence_token_count > max_tokens:
-                if current_chunk:
-                    chunks.append(' '.join(current_chunk))
-                    current_chunk = []
-                    current_tokens = 0
-                
-                # Split long sentence into smaller pieces
-                words = sentence.split()
-                temp_chunk = []
-                temp_tokens = 0
-                
-                for word in words:
-                    word_tokens = tokenizer.encode(word + ' ')
-                    if temp_tokens + len(word_tokens) > max_tokens:
-                        chunks.append(' '.join(temp_chunk))
-                        temp_chunk = [word]
-                        temp_tokens = len(word_tokens)
-                    else:
-                        temp_chunk.append(word)
-                        temp_tokens += len(word_tokens)
-                
-                if temp_chunk:
-                    current_chunk = temp_chunk
-                    current_tokens = temp_tokens
-                continue
-            
-            # Check if adding this sentence would exceed the limit
-            if current_tokens + sentence_token_count > max_tokens:
-                chunks.append(' '.join(current_chunk))
-                current_chunk = [sentence]
-                current_tokens = sentence_token_count
-            else:
-                current_chunk.append(sentence)
-                current_tokens += sentence_token_count
+        if current_length >= max_tokens:
+            chunks.append(' '.join(current_chunk))
+            current_chunk = []
+            current_length = 0
     
-    # Add any remaining text
     if current_chunk:
         chunks.append(' '.join(current_chunk))
     
@@ -208,7 +159,7 @@ if name:
         # Create the full text content
         full_text = '\n\n\n'.join(text_chunks)
         # Split the full text into manageable chunks
-        text_segments = split_for_claude(full_text, max_tokens=200000)
+        text_segments = split_for_claude(full_text, max_tokens=180000)
         st.write(len(text_segments))
         all_tests = []
         for segment in text_segments:
