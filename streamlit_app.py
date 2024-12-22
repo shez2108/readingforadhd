@@ -169,6 +169,12 @@ if name:
         combined_tests = "\n\n".join(all_tests)
         st.write(combined_tests)
         st.download_button(
+            label="Download Segment",
+            data=segment,
+            file_name = 'segment.txt',
+            mime="text/plain"
+        )
+        st.download_button(
             label="Download Text File",
             data = full_text,
             file_name = f'{name}.txt',
