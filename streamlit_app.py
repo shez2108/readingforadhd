@@ -4,6 +4,7 @@ import re
 import os
 import anthropic
 from transformers import GPT2Tokenizer
+import time
 
 st.title("ADHD Reader")
 
@@ -173,6 +174,7 @@ if name:
         for segment in text_segments:
             test = create_test(segment)
             all_tests.append(test)
+            time.sleep(60)
         
         combined_tests = "\n\n".join(all_tests)
         st.write(combined_tests)
