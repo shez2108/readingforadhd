@@ -126,26 +126,7 @@ def create_test(text):
     except Exception as e:
         return f"Error creating test: {str(e)}"
 
-"""def split_for_claude(text, max_tokens=4096):
-    #Split text into chunks that fit within the token limit.#
-    words = text.split()
-    chunks = []
-    current_chunk = []
-    current_length = 0
-    
-    for word in words:
-        current_chunk.append(word)
-        current_length += len(word) + 1  # +1 for the space
-        
-        if current_length >= max_tokens:
-            chunks.append(' '.join(current_chunk))
-            current_chunk = []
-            current_length = 0
-    
-    if current_chunk:
-        chunks.append(' '.join(current_chunk))
-    
-    return chunks"""
+
 
 def split_for_claude(text, max_tokens=4096):
     """
