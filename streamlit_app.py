@@ -11,9 +11,9 @@ st.title("ADHD Reader")
 
 st.write(
     """
-    #### Do you have trouble reading eBooks from your Kindle?
-    #### Do you find that your eyes can't help moving across the page?
-    #### Or that the content you're reading goes in one ear then out the other?
+    ### Do you have trouble reading eBooks from your Kindle?
+    ### Do you find that your eyes can't help moving across the page?
+    ### Or that the content you're reading goes in one ear then out the other?
     """
 )
 
