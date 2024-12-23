@@ -115,7 +115,7 @@ def create_test(text):
             messages=[
                 {
                     "role": "user", 
-                    "content": f"Based on the following text, create a two-question test comprehension (no answers needed):{text}"
+                    "content": f"Based on the following text, create a test comprehension (no answers needed):{text}"
                 }
             ]
         )
