@@ -123,6 +123,7 @@ def create_test(text):
         # The response is already a string, no need for complex formatting
         
         questions = format_claude_response(message.content)
+        time.sleep(60)
         return questions
     except Exception as e:
         return f"Error creating test: {str(e)}"
