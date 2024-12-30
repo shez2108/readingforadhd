@@ -7,7 +7,7 @@ from transformers import GPT2Tokenizer
 import time
 
 st.set_page_config(
-    page_title="ADHD Reader",
+    page_title="Assisted Reader",
     page_icon="📚",
     layout="centered"
 )
