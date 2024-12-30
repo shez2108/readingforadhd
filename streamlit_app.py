@@ -31,7 +31,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Main title with icon
-st.title("📚 ADHD Reader")
+st.title("📚 Bionic Reader")
 
 # Create three columns for the intro questions
 col1, col2, col3 = st.columns(3)
