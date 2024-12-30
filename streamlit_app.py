@@ -7,7 +7,7 @@ from transformers import GPT2Tokenizer
 import time
 
 st.set_page_config(
-    page_title="Break it Down: Make Difficult Texts More Managable To Read",
+    page_title="Breaking Down Difficult Texts",
     page_icon="📚",
     layout="centered"
 )
