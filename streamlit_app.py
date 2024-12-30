@@ -13,6 +13,26 @@ st.set_page_config(
 )
 
 
+# Custom CSS
+st.markdown("""
+    <style>
+    .main {
+        padding: 2rem;
+    }
+    .stTitle {
+        color: #1E88E5;
+        font-size: 3rem !important;
+    }
+    .stAlert {
+        padding: 1rem;
+        border-radius: 0.5rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Main title with icon
+st.title("📚 ADHD Reader")
+
 # Create three columns for the intro questions
 col1, col2, col3 = st.columns(3)
 
