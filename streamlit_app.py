@@ -47,6 +47,12 @@ st.write(
     "Name the text, input a PDF and let's chunk it up!"
 )
 
+# Add a divider
+st.divider()
+
+# Main instruction with better styling
+st.markdown("### 📝 Let's make reading easier for you!")
+
 # Near the top of your file, after imports
 try:
     api_key = st.secrets["ANTHROPIC_API_KEY"]
