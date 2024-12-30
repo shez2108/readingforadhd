@@ -6,7 +6,11 @@ import anthropic
 from transformers import GPT2Tokenizer
 import time
 
-st.title("ADHD Reader")
+st.set_page_config(
+    page_title="ADHD Reader",
+    page_icon="📚",
+    layout="centered"
+)
 
 
 # Create three columns for the intro questions
