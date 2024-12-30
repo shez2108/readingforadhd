@@ -44,7 +44,7 @@ with col3:
     st.error("🧠 Does content go in one ear and out the other?")
 
 st.write(
-    "Name the text, input a PDF and let's chunk it up!"
+    "Name the text, input a PDF and let's break it down!"
 )
 
 # Add a divider
