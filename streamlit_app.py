@@ -9,13 +9,15 @@ import time
 st.title("ADHD Reader")
 
 
-st.write(
-    """
-    ### Do you have trouble reading eBooks from your Kindle?
-    ### Do you find that your eyes can't help moving across the page?
-    ### Or that the content you're reading goes in one ear and out the other?
-    """
-)
+# Create three columns for the intro questions
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.info("🤔 Do you have trouble reading eBooks from your Kindle?")
+with col2:
+    st.warning("👀 Do you find that your eyes can't help moving across the page?")
+with col3:
+    st.error("🧠 Does content go in one ear and out the other?")
 
 st.write(
     "Name the text, input a PDF and let's chunk it up!"
