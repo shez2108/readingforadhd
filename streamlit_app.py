@@ -7,7 +7,7 @@ from transformers import GPT2Tokenizer
 import time
 
 st.set_page_config(
-    page_title="Bionic Reader",
+    page_title="Break it Down: Make Difficult Texts More Managable To Read",
     page_icon="📚",
     layout="centered"
 )
@@ -31,7 +31,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Main title with icon
-st.title("📚 Bionic Reader")
+st.title("📚 ADHD/Dyslexia Reader")
 
 # Create three columns for the intro questions
 col1, col2, col3 = st.columns(3)
@@ -190,39 +190,46 @@ def split_for_claude(text, max_tokens=200000):
     
     return chunks
 
-name = st.text_input("Enter the name of the book")
-if name:
-    name = name.replace(' ', '_').lower()
-    document = st.file_uploader("Import a PDF", type="pdf")
-    convert_button = st.button("Convert!")
-    if convert_button:
-        st.write("Button Clicked!")
-        text_chunks = pdf_to_text(document)
-        # Create the full text content
-        full_text = '\n\n'.join(text_chunks)
-        # Split the full text into manageable chunks
-        text_segments = split_for_claude(full_text, max_tokens=200000)
-        st.write(len(text_segments))
-        all_tests = []
-        for segment in text_segments:
-            test = create_test(segment)
-            all_tests.append(test)
-            time.sleep(120)
+# initialize the search_type in session state if it doesn't exist
+if 'reading_type' not in st.session_state:
+    st.session_state.search_type = None
+
+# Replace the button checks with radio buttons
+search_type = st.radio("Select Reading Type", ["Chunked", "Bionic"])
+if search_type == 'Chunked':
+    name = st.text_input("Enter the name of the book")
+    if name:
+        name = name.replace(' ', '_').lower()
+        document = st.file_uploader("Import a PDF", type="pdf")
+        convert_button = st.button("Convert!")
+        if convert_button:
+            st.write("Button Clicked!")
+            text_chunks = pdf_to_text(document)
+            # Create the full text content
+            full_text = '\n\n'.join(text_chunks)
+            # Split the full text into manageable chunks
+            text_segments = split_for_claude(full_text, max_tokens=200000)
+            st.write(len(text_segments))
+            all_tests = []
+            for segment in text_segments:
+                test = create_test(segment)
+                all_tests.append(test)
+                time.sleep(120)
         
-        combined_tests = "\n\n".join(all_tests)
-        st.write(combined_tests)
-        st.download_button(
-            label="Download Text File",
-            data = full_text,
-            file_name = f'{name}.txt',
-            mime="text/plain"
-        )
-        st.download_button(
-            label="Download Questions",
-            data = combined_tests,
-            file_name = f'{name}_test.txt',
-            mime="text/plain"
-        )
+            combined_tests = "\n\n".join(all_tests)
+            st.write(combined_tests)
+            st.download_button(
+                label="Download Text File",
+                data = full_text,
+                file_name = f'{name}.txt',
+                mime="text/plain"
+            )
+            st.download_button(
+                label="Download Questions",
+                data = combined_tests,
+                file_name = f'{name}_test.txt',
+                mime="text/plain"
+            )
 
 
 # Footer note in an info box
