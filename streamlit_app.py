@@ -5,6 +5,8 @@ import os
 import anthropic
 from transformers import GPT2Tokenizer
 import time
+from io import BytesIO
+from docx import Document
 
 st.set_page_config(
     page_title="Breaking Down Difficult Texts",
