@@ -72,6 +72,7 @@ def clean_text(text):
     text = re.sub(r'\s+', ' ', text)
     # Split into paragraphs on period followed by space
     paragraphs = re.split(r'(?<=\.)\s+', text)
+    paragraphs = bold_initial_letters(paragraphs)
     return [p.strip() for p in paragraphs if p.strip()]
 
 def chunk_text(text, words_per_chunk=8):
@@ -123,7 +124,6 @@ def pdf_to_docx(file, text_path=None):
         text = page.extract_text()
         # Clean and format text
         paragraphs = clean_text(text)
-        paragraphs = bold_initial_letters(paragraphs)
 
     return paragraphs
 
