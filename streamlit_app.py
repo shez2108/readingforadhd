@@ -93,6 +93,39 @@ def chunk_text(text, words_per_chunk=8):
     
     return chunks
 
+def bold_initial_letters(text):
+    # Split the text into words
+    words = text.split()
+    
+    # Process each word
+    result = []
+    for word in words:
+        if len(word) > 0:
+            # Bold the first n characters based on word length
+            bold_count = min(len(word), len(word) // 2)  # Bold half the word length
+            if bold_count == 0:  # Ensure at least one letter is bold
+                bold_count = 1
+                
+            bolded_part = word[:bold_count]
+            regular_part = word[bold_count:]
+            result.append(f"**{bolded_part}**{regular_part}")
+    
+    # Join the words back together
+    return ' '.join(result)
+
+def pdf_to_docx(file, text_path=None):
+    reader = pypdf.PdfReader(file)
+    all_text = []
+    # Process each page and extract the text
+    for page_num in range(len(reader.pages)):
+        # Extract text from page
+        page = reader.pages[page_num]
+        text = page.extract_text()
+
+        # Clean and format text
+        paragraphs = clean_text(text)
+
+    return paragraphs
 
 def pdf_to_text(file, text_path=None):
     reader = pypdf.PdfReader(file)
@@ -226,6 +259,40 @@ with tab1:
                     data=full_text,
                     file_name=f'{name}.txt',
                     mime="text/plain"
+                )
+                st.download_button(
+                    label="Download Questions",
+                    data=combined_tests,
+                    file_name=f'{name}_test.txt',
+                    mime="text/plain"
+                )
+    if search_type == 'Bionic':
+        name = st.text_input("Enter the name of the book")
+        if name:
+            name = name.replace(' ', '_').lower()
+            document = st.file_uploader("Import a PDF", type="pdf")
+            convert_button = st.button("Convert!")
+            if convert_button:
+                st.write("Button Clicked!")
+                text_chunks = pdf_to_docx(document)
+                # Create the full text content
+                full_text = ' '.join(text_chunks)
+                # Split the full text into manageable chunks
+                text_segments = split_for_claude(full_text, max_tokens=200000)
+                st.write(len(text_segments))
+                all_tests = []
+                for segment in text_segments:
+                    test = create_test(segment)
+                    all_tests.append(test)
+                    time.sleep(120)
+            
+                combined_tests = "\n\n".join(all_tests)
+                st.write(combined_tests)
+                st.download_button(
+                    label="Download DOCX file",
+                    data=full_text,
+                    file_name=f'{name}.docx',
+                    mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 )
                 st.download_button(
                     label="Download Questions",
