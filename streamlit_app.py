@@ -53,7 +53,7 @@ st.divider()
 # Main instruction with better styling
 st.markdown("### 📝 Let's make reading easier for you!")
 
-tab1, tab2 = st.tabs(["Import PDF", "Project Gutenberg"])
+tab1, tab2 = st.tabs(["Import PDF", "Import ePub", 'Import Text File"])
 
 # Near the top of your file, after imports
 try:
