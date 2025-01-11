@@ -33,6 +33,8 @@ st.markdown("""
 # Main title with icon
 st.title("📚 ADHD/Dyslexia Reader")
 
+tab1, tab2 = st.tabs(["Import PDF", "Project Gutenberg"])
+
 # Create three columns for the intro questions
 col1, col2, col3 = st.columns(3)
 
