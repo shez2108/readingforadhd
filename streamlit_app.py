@@ -234,7 +234,16 @@ with tab1:
                     mime="text/plain"
                 )
 
+with tab2:
+    # initialize the search_type in session state if it doesn't exist
+    if 'reading_type' not in st.session_state:
+        st.session_state.search_type = None
 
+    # Replace the button checks with radio buttons
+    search_type = st.radio("Select Reading Type", ["Chunked", "Bionic"])
+    if search_type == 'Chunked':
+        name = st.text_input('Enter the name of the book")
+    
 # Footer note in an info box
 st.info("""
     ℹ️ **Note**: This tool is specifically built for PDFs. It:
