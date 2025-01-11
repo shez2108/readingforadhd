@@ -241,8 +241,6 @@ with tab2:
 
     # Replace the button checks with radio buttons
     search_type = st.radio("Select Reading Type", ["Chunked", "Bionic"])
-    if search_type == 'Chunked':
-        name = st.text_input('Enter the name of the book')
     
 # Footer note in an info box
 st.info("""
