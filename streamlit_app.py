@@ -121,9 +121,9 @@ def pdf_to_docx(file, text_path=None):
         # Extract text from page
         page = reader.pages[page_num]
         text = page.extract_text()
-
         # Clean and format text
         paragraphs = clean_text(text)
+        paragraphs = bold_initial_letters(paragraphs)
 
     return paragraphs
 
