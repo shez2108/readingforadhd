@@ -234,13 +234,6 @@ with tab1:
                     mime="text/plain"
                 )
 
-with tab2:
-    # initialize the search_type in session state if it doesn't exist
-    if 'reading_type' not in st.session_state:
-        st.session_state.search_type = None
-
-    # Replace the button checks with radio buttons
-    search_type = st.radio("Select Reading Type", ["Chunked", "Bionic"])
     
 # Footer note in an info box
 st.info("""
