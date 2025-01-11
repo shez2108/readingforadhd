@@ -2,4 +2,4 @@ streamlit
 pypdf
 anthropic
 transformers
-docx
+python-docx
