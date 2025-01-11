@@ -3,3 +3,4 @@ pypdf
 anthropic
 transformers
 python-docx
+html
