@@ -228,6 +228,15 @@ def split_for_claude(text, max_tokens=200000):
     
     return chunks
 
+# Generate a DOCX file in memory
+def generate_docx(text):
+    doc = Document()
+    doc.add_paragraph(text)
+    buffer = BytesIO()
+    doc.save(buffer)
+    buffer.seek(0)
+    return buffer
+
 with tab1:
     # initialize the search_type in session state if it doesn't exist
     if 'reading_type' not in st.session_state:
@@ -281,6 +290,8 @@ with tab1:
                 # Create the full text content
                 full_text = ' '.join(text_chunks)
                 # Split the full text into manageable chunks
+                # Generate the DOCX file
+                docx_file = generate_docx(full_text)
                 text_segments = split_for_claude(full_text, max_tokens=200000)
                 st.write(len(text_segments))
                 all_tests = []
@@ -293,7 +304,7 @@ with tab1:
                 st.write(combined_tests)
                 st.download_button(
                     label="Download DOCX file",
-                    data=full_text,
+                    data=docx_file,
                     file_name=f'{name}.docx',
                     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                 )
