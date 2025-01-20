@@ -273,6 +273,7 @@ def generate_docx(text):
     doc.save(buffer)
     buffer.seek(0)
     return buffer
+    
 
 with tab1:
     # initialize the search_type in session state if it doesn't exist
@@ -282,6 +283,11 @@ with tab1:
     # Replace the button checks with radio buttons
     search_type = st.radio("Select Reading Type", ["Chunked", "Bionic"])
     if search_type == 'Chunked':
+        first, second = st.columns(2)
+        with first:
+            st.image(normal, caption='Normal')
+        with second:
+            st.image(chunked_example, caption='Chunked')
         st.image(normal, caption='Normal')
         st.image(chunked_example, caption='Chunked')
         name = st.text_input("Enter the name of the book")
@@ -318,8 +324,11 @@ with tab1:
                     mime="text/plain"
                 )
     if search_type == 'Bionic':
-        st.image(normal, caption='Normal')
-        st.image(bionic_example, caption='Bionic')
+        first, second = st.columns(2)
+        with first:
+            st.image(normal, caption='Normal')
+        with second:
+            st.image(bionic_example, caption='Bionic')
         name = st.text_input("Enter the name of the book")
         if name:
             name = name.replace(' ', '_').lower()
