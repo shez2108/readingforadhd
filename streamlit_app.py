@@ -50,6 +50,14 @@ st.write(
     "Name the text, input a PDF and let's break it down!"
 )
 
+normal = Image.open('normal_text.png')
+
+st.image(normal, caption='Normal', width=None)
+
+chunked_example = Image.open('chunked_text.png')
+
+st.image(chunked_example, caption='Chunked', width=None)
+
 # Add a divider
 st.divider()
 
