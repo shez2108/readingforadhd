@@ -70,9 +70,9 @@ bionic_example = Image.open('bionic.png')
 # Using columns to control width
 first, second, third = st.columns(3)
 with first:
-    st.image(normal, caption='Normal')
+    st.image(normal, caption='Normal', width=200)
 with second:
-    st.image(chunked_example, caption='Chunked')
+    st.image(chunked_example, caption='Chunked', width=200)
 with third:
     st.image(bionic_example, caption='Bionic')
 
