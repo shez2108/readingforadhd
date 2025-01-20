@@ -62,9 +62,9 @@ st.image(chunked_example, caption='Chunked', width=300)
 # Using columns to control width
 first, second, third = st.columns(3)
 with first:
-    st.image(normal)
+    st.image(normal, caption='Normal')
 with second:
-    st.image(chunked_example)
+    st.image(chunked_example, caption='Chunked')
 
 # Add a divider
 st.divider()
