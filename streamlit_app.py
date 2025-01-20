@@ -46,9 +46,9 @@ with col2:
 with col3:
     st.error("🧠 Does content go in one ear and out the other?")
 
-normal = Image.open('normal_text.png')
+normal = Image.open('normal_txt.png')
 
-chunked_example = Image.open('chunked_text.png')
+chunked_example = Image.open('chunked_txt.png')
 
 bionic_example = Image.open('bionic.png')
 
