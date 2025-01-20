@@ -64,14 +64,6 @@ st.info("""
     **There**by **guid**ing **t**he **eye**s **mor**e **efficien**tly.
 """)
 
-# Using columns to control width
-first, second, third = st.columns(3)
-with first:
-    st.image(normal, caption='Normal')
-with second:
-    st.image(chunked_example, caption='Chunked')
-with third:
-    st.image(bionic_example, caption='Bionic')
 
 # Load your images
 images = {
@@ -359,6 +351,16 @@ with tab1:
                     file_name=f'{name}_test.txt',
                     mime="text/plain"
                 )
+
+
+# Using columns to control width
+first, second, third = st.columns(3)
+with first:
+    st.image(normal, caption='Normal')
+with second:
+    st.image(chunked_example, caption='Chunked')
+with third:
+    st.image(bionic_example, caption='Bionic')
 
     
 # Footer note in an info box
