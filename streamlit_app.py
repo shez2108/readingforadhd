@@ -52,6 +52,18 @@ chunked_example = Image.open('chunked_txt.png')
 
 bionic_example = Image.open('bionic.png')
 
+
+# Footer note in an info box
+st.info("""
+    ℹ️ **Chunked**: This format breaks down text into short, sizeable chunks - increasing the space between lines and adding deliberate breaks to the middle of sentences. It forces the reader to slow down.
+""")
+
+st.info("""
+    ℹ️ **Bionic**: **A** **ne**w **a**nd **popu**lar **for**m **o**f **readi**ng, **it** **enhan**ces **focu**s and **readi**ng **spe**ed **b**y **emphasiz**ing **ke**y **par**ts **of** **wor**ds. **Usual**ly, **th**is **is** **do**ne **by** **bold**ing **th**e **fir**st 
+    **few** **letter**s **o**f **ea**ch **wo**rd. 
+    **There**by **guid**ing **t**he **eye**s **mor**e **efficien**tly.
+""")
+
 # Using columns to control width
 first, second, third = st.columns(3)
 with first:
@@ -80,17 +92,6 @@ images = {
 
 # Add a divider
 st.divider()
-
-# Footer note in an info box
-st.info("""
-    ℹ️ **Chunked**: This format breaks down text into short, sizeable chunks - increasing the space between lines and adding deliberate breaks to the middle of sentences. It forces the reader to slow down.
-""")
-
-st.info("""
-    ℹ️ **Bionic**: **A** **ne**w **a**nd **popu**lar **for**m **o**f **readi**ng, **it** **enhan**ces **focu**s and **readi**ng **spe**ed **b**y **emphasiz**ing **ke**y **par**ts **of** **wor**ds. **Usual**ly, **th**is **is** **do**ne **by** **bold**ing **th**e **fir**st 
-    **few** **letter**s **o**f **ea**ch **wo**rd. 
-    **There**by **guid**ing **t**he **eye**s **mor**e **efficien**tly.
-""")
 
 st.write(
     "Name the text, input a file and let's break it down!"
