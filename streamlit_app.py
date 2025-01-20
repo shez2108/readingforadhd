@@ -55,12 +55,16 @@ normal = Image.open('normal_text.png')
 
 chunked_example = Image.open('chunked_text.png')
 
+bionic_example = Image.open('bionic.png')
+
 # Using columns to control width
 first, second, third = st.columns(3)
 with first:
     st.image(normal, caption='Normal')
 with second:
     st.image(chunked_example, caption='Chunked')
+with third:
+    st.image(bionic_example, caption='Bionic')
 
 # Add a divider
 st.divider()
