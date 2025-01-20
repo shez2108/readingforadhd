@@ -80,7 +80,7 @@ with third:
 images = {
     'Normal': normal,
     'Chunked': chunked_example,
-    'Bionic': bionic)
+    'Bionic': bionic
 }
 
 # Create a selection box
