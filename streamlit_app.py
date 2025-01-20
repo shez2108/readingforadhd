@@ -83,11 +83,15 @@ images = {
     'Bionic': bionic_example
 }
 
-# Create a selection box
-selected_image = st.selectbox('Select example view:', list(images.keys()))
+# Create radio buttons
+selected_view = st.radio(
+    "Choose image view:",
+    options=list(images.keys()),
+    horizontal=True  # Makes the radio buttons horizontal
+)
 
-# Display the selected image
-st.image(images[selected_image])
+# Show selected image
+st.image(images[selected_view])
 
 # Add a divider
 st.divider()
