@@ -69,14 +69,14 @@ images = {
 }
 
 # Create radio buttons
-selected_view = st.radio(
-    "Choose image view:",
-    options=list(images.keys()),
-    horizontal=True  # Makes the radio buttons horizontal
-)
+#selected_view = st.radio(
+    #"Choose image view:",
+    #options=list(images.keys()),
+    #horizontal=True  # Makes the radio buttons horizontal
+#)
 
 # Show selected image
-st.image(images[selected_view])
+#st.image(images[selected_view])
 
 # Add a divider
 st.divider()
