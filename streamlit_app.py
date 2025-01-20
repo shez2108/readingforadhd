@@ -282,6 +282,8 @@ with tab1:
     # Replace the button checks with radio buttons
     search_type = st.radio("Select Reading Type", ["Chunked", "Bionic"])
     if search_type == 'Chunked':
+        st.image(normal, caption='Normal')
+        st.image(chunked_example, caption='Chunked')
         name = st.text_input("Enter the name of the book")
         if name:
             name = name.replace(' ', '_').lower()
@@ -316,6 +318,8 @@ with tab1:
                     mime="text/plain"
                 )
     if search_type == 'Bionic':
+        st.image(normal, caption='Normal')
+        st.image(bionic_example, caption='Bionic')
         name = st.text_input("Enter the name of the book")
         if name:
             name = name.replace(' ', '_').lower()
@@ -352,15 +356,6 @@ with tab1:
                     mime="text/plain"
                 )
 
-
-# Using columns to control width
-first, second, third = st.columns(3)
-with first:
-    st.image(normal, caption='Normal')
-with second:
-    st.image(chunked_example, caption='Chunked')
-with third:
-    st.image(bionic_example, caption='Bionic')
 
     
 # Footer note in an info box
