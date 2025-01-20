@@ -53,13 +53,13 @@ chunked_example = Image.open('chunked_txt.png')
 bionic_example = Image.open('bionic.png')
 
 # Using columns to control width
-#first, second, third = st.tabs(['Normal', 'Chunked', 'Bionic'])
-#with first:
-    #st.image(normal, caption='Normal')
-#with second:
-    #st.image(chunked_example, caption='Chunked')
-#with third:
-    #st.image(bionic_example, caption='Bionic')"""
+first, second, third = st.tabs(['Normal', 'Chunked', 'Bionic'])
+with first:
+    st.image(normal, caption='Normal')
+with second:
+    st.image(chunked_example, caption='Chunked')
+with third:
+    st.image(bionic_example, caption='Bionic')"""
 
 # Load your images
 images = {
