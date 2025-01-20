@@ -74,7 +74,7 @@ with first:
 with second:
     st.image(chunked_example, caption='Chunked')
 with third:
-    st.image(bionic_example, caption='Bionic', width=200)
+    st.image(bionic_example, caption='Bionic')
 
 # Add a divider
 st.divider()
