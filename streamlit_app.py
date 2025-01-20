@@ -68,13 +68,26 @@ chunked_example = Image.open('chunked_text.png')
 bionic_example = Image.open('bionic.png')
 
 # Using columns to control width
-first, second, third = st.tabs(['Normal', 'Chunked', 'Bionic'])
+"""first, second, third = st.tabs(['Normal', 'Chunked', 'Bionic'])
 with first:
     st.image(normal, caption='Normal')
 with second:
     st.image(chunked_example, caption='Chunked')
 with third:
-    st.image(bionic_example, caption='Bionic')
+    st.image(bionic_example, caption='Bionic')"""
+
+# Load your images
+images = {
+    'Normal': normal,
+    'Chunked': chunked_example,
+    'Bionic': bionic)
+}
+
+# Create a selection box
+selected_image = st.selectbox('Select example view:', list(images.keys()))
+
+# Display the selected image
+st.image(images[selected_image])
 
 # Add a divider
 st.divider()
