@@ -52,11 +52,11 @@ st.write(
 
 normal = Image.open('normal_text.png')
 
-st.image(normal, caption='Normal', width=None)
+st.image(normal, caption='Normal', width=300)
 
 chunked_example = Image.open('chunked_text.png')
 
-st.image(chunked_example, caption='Chunked', width=None)
+st.image(chunked_example, caption='Chunked', width=300)
 
 # Add a divider
 st.divider()
