@@ -52,7 +52,7 @@ st.info("""
 """)
 
 st.info("""
-    ℹ️ **Bionic**: **A** **ne**w **a**nd **popu**lar **for**m o*f **readi**ng, **it** **enhan**ces **focu**s and **readi**ng **spe**ed **b**y **emphasiz**ing **ke**y **par**ts **of** **wor**ds. **Usual**ly, **th**is **is** **do**ne **by** **bold**ing **th**e **fir**st 
+    ℹ️ **Bionic**: **A** **ne**w **a**nd **popu**lar **for**m **o**f **readi**ng, **it** **enhan**ces **focu**s and **readi**ng **spe**ed **b**y **emphasiz**ing **ke**y **par**ts **of** **wor**ds. **Usual**ly, **th**is **is** **do**ne **by** **bold**ing **th**e **fir**st 
     **few** **letter**s **o**f **ea**ch **wo**rd. 
     **There**by **guid**ing **t**he **eye**s **mor**e **efficien**tly.
 """)
