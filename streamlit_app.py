@@ -59,7 +59,7 @@ with first:
 with second:
     st.image(chunked_example, caption='Chunked')
 with third:
-    st.image(bionic_example, caption='Bionic')"""
+    st.image(bionic_example, caption='Bionic')
 
 # Load your images
 images = {
