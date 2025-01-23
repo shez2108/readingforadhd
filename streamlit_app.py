@@ -288,8 +288,6 @@ with tab1:
             st.image(normal, caption='Normal')
         with second:
             st.image(chunked_example, caption='Chunked')
-        st.image(normal, caption='Normal')
-        st.image(chunked_example, caption='Chunked')
         name = st.text_input("Enter the name of the book")
         if name:
             name = name.replace(' ', '_').lower()
