@@ -65,12 +65,6 @@ st.info("""
 """)
 
 
-# Load your images
-images = {
-    'Normal': normal,
-    'Chunked': chunked_example,
-    'Bionic': bionic_example
-}
 
 # Create radio buttons
 #selected_view = st.radio(
