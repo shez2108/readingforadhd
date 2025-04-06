@@ -398,27 +398,12 @@ with tab1:
                 #full_text = ' '.join(text_chunks)
                 # Generate the DOCX file
                 docx_file = generate_docx(full_text)
-                text_segments = split_for_claude(full_text, max_tokens=200000)
-                st.write(len(text_segments))
-                all_tests = []
-                for segment in text_segments:
-                    test = create_test(segment)
-                    all_tests.append(test)
-                    time.sleep(120)
-            
-                combined_tests = "\n\n".join(all_tests)
-                st.write(combined_tests)
+                
                 st.download_button(
                     label="Download DOCX file",
                     data=docx_file,
                     file_name=f'{name}.docx',
                     mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                )
-                st.download_button(
-                    label="Download Questions",
-                    data=combined_tests,
-                    file_name=f'{name}_test.txt',
-                    mime="text/plain"
                 )
 
 
