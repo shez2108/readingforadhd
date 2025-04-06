@@ -116,7 +116,7 @@ class Bionic:
 		fixation = int(word_length / self.fixation_factor)
 		return fixation if fixation != 0 else 1
 
-def main(output_path):
+def main():
 	bionic = Bionic()
 	bionic.load()
 	bionic.bionify()
@@ -223,7 +223,7 @@ def pdf_to_bionic_text(file, text_path=None):
     with open(output_path, "w", encoding="utf-8") as text_file:
         text_file.write(full_text)
 
-    bionic_text = main(output_path)
+    bionic_text = main()
     st.write(bionic_text)
     return bionic_text
 
