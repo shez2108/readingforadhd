@@ -229,22 +229,20 @@ def pdf_to_chunk(file, text_path=None):
 def pdf_to_bionic_text(file, text_path=None):
     reader = pypdf.PdfReader(file)
     all_text = []
-    # Process each page and extract the text
-    for page_num in range(len(reader.pages)):
-        # Extract text from page
-        page = reader.pages[page_num]
+
+    for page in reader.pages:
         text = page.extract_text()
+        if text:
+            paragraphs = clean_text(text)  # Assumes clean_text returns a list of strings
+            all_text.extend(paragraphs)
 
-        # Clean and format text
-        paragraphs = clean_text(text)
-        for para in paragraphs:
-            all_text.append(para)
+    full_text = "\n\n".join(all_text)
+    output_path = text_path or "Output.txt"
 
-    # return to a text file
-    with open("Output.txt", "w") as text_file:
-        text_file.write(all_text)
-        
-    bionic_text = main(text_file)
+    with open(output_path, "w", encoding="utf-8") as text_file:
+        text_file.write(full_text)
+
+    bionic_text = main(output_path)  # main() takes the file path
     return bionic_text
 
 def format_claude_response(response):
