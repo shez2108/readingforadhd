@@ -120,6 +120,7 @@ def main(text_file):
 	bionic = Bionic()
 	bionic.load(text_file)
 	bionic.bionify()
+	st.write(bionic.print())
 
 # Add a divider
 st.divider()
@@ -170,26 +171,6 @@ def chunk_text(text, words_per_chunk=8):
         chunks.append(' '.join(current_chunk))
     
     return chunks
-
-def bold_initial_letters(text):
-    # Split the text into words
-    words = text.split()
-    
-    # Process each word
-    result = []
-    for word in words:
-        if len(word) > 0:
-            # Bold the first n characters based on word length
-            bold_count = min(len(word), len(word) // 2)  # Bold half the word length
-            if bold_count == 0:  # Ensure at least one letter is bold
-                bold_count = 1
-                
-            bolded_part = word[:bold_count]
-            regular_part = word[bold_count:]
-            result.append(f"**{bolded_part}**{regular_part}")
-    
-    # Join the words back together
-    return ' '.join(result)
 
 def pdf_to_docx(file, text_path=None):
     reader = pypdf.PdfReader(file)
