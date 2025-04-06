@@ -116,9 +116,9 @@ class Bionic:
 		fixation = int(word_length / self.fixation_factor)
 		return fixation if fixation != 0 else 1
 
-def main(text_file):
+def main(output_path):
 	bionic = Bionic()
-	bionic.load(text_file)
+	bionic.load()
 	bionic.bionify()
 	st.write(bionic.print())
 
