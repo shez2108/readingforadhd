@@ -242,7 +242,7 @@ def pdf_to_bionic_text(file, text_path=None):
 
     # return to a text file
     with open("Output.txt", "w") as text_file:
-        text_file.write(paragraphs)
+        text_file.write(all_text)
         
     bionic_text = main(text_file)
     return bionic_text
