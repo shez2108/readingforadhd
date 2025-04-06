@@ -120,6 +120,7 @@ def main(text_file):
 	bionic = Bionic()
 	bionic.load(text_file)
 	bionic.bionify()
+	bionic.print()
 
 # Add a divider
 st.divider()
