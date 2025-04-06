@@ -243,7 +243,8 @@ def pdf_to_bionic_text(file, text_path=None):
     with open(output_path, "w", encoding="utf-8") as text_file:
         text_file.write(full_text)
 
-    bionic_text = main(output_path)  # main() takes the file path
+    bionic_text = main(output_path)
+    print(bionic_text)
     return bionic_text
 
 def format_claude_response(response):
