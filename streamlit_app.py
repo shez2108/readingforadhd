@@ -120,7 +120,6 @@ def main(text_file):
 	bionic = Bionic()
 	bionic.load(text_file)
 	bionic.bionify()
-	bionic.print()
 
 # Add a divider
 st.divider()
@@ -244,7 +243,7 @@ def pdf_to_bionic_text(file, text_path=None):
         text_file.write(full_text)
 
     bionic_text = main(output_path)
-    print(bionic_text)
+    st.write(bionic_text)
     return bionic_text
 
 def format_claude_response(response):
