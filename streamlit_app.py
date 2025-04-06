@@ -67,15 +67,59 @@ st.info("""
 
 
 
-# Create radio buttons
-#selected_view = st.radio(
-    #"Choose image view:",
-    #options=list(images.keys()),
-    #horizontal=True  # Makes the radio buttons horizontal
-#)
+class Bionic:
 
-# Show selected image
-#st.image(images[selected_view])
+	def __init__(self, path:str=None) -> None:
+		self.fixation_factor = 1.6
+		self.data = []
+
+		if path:
+			self.load(path)
+
+	def load(self, path: str) -> None:
+		with open(path, 'r') as file:
+			self.data = file.readlines()
+	
+	def print(self, data:str=None) -> None:
+		data = data if data else self.data
+		for line in data:
+			print(line)
+
+	def bionify(self, data:str=None) -> str:
+		data = data if data else self.data
+		for posistion, line in enumerate(data):
+			data[posistion] = self.bionify_line(line)
+		return self.data
+
+	def bionify_line(self, line:str) -> str:
+		bionic_line = ""
+		for word in line.split():
+			bionic_line += f"{self.bionify_word(word)} "
+		return bionic_line.strip()
+
+	def bionify_word(self, word:str) -> str:
+		if '-' in word:
+			part_a, part_b = word.split('-')
+			part_a_fixation = self._get_fixation(part_a)
+			part_a = f"\033[0m\033[01m{part_a[:part_a_fixation]}\033[0m\033[02m{part_a[part_a_fixation:]}\033[0m"
+			part_b_fixation = self._get_fixation(part_b)
+			part_b = f"\033[0m\033[01m{part_b[:part_b_fixation]}\033[0m\033[02m{part_b[part_b_fixation:]}\033[0m"
+			bionic_word = f"{part_a}-{part_b}"
+		else:
+			fixation = self._get_fixation(word)
+			bionic_word = f"\033[0m\033[01m{word[:fixation]}\033[0m\033[02m{word[fixation:]}\033[0m"
+		return bionic_word
+
+	def _get_fixation(self, word: str) -> int:
+		word_stripped = word.translate(str.maketrans('', '', string.punctuation))
+		word_length = len(word_stripped)
+		fixation = int(word_length / self.fixation_factor)
+		return fixation if fixation != 0 else 1
+
+def main(text_file):
+	bionic = Bionic()
+	bionic.load(text_file)
+	bionic.bionify()
 
 # Add a divider
 st.divider()
@@ -162,7 +206,7 @@ def pdf_to_docx(file, text_path=None):
             all_text.extend(chunks)
     return all_text
 
-def pdf_to_text(file, text_path=None):
+def pdf_to_chunk(file, text_path=None):
     reader = pypdf.PdfReader(file)
     all_text = []
     # Process each page and extract the text
@@ -181,6 +225,26 @@ def pdf_to_text(file, text_path=None):
             all_text.append('')  # Add extra space between paragraphs
 
     return all_text
+
+def pdf_to_bionic_text(file, text_path=None):
+    reader = pypdf.PdfReader(file)
+    # Process each page and extract the text
+    for page_num in range(len(reader.pages)):
+        # Extract text from page
+        page = reader.pages[page_num]
+        text = page.extract_text()
+
+        # Clean and format text
+        paragraphs = clean_text(text)
+        for para in paragraphs:
+            all_text.extend(para)
+
+    # return to a text file
+    with open("Output.txt", "w") as text_file:
+        text_file.write(paragraphs)
+        
+    bionic_text = main(text_file)
+    return bionic_text
 
 def format_claude_response(response):
     """Clean and format Claude's response for better display"""
@@ -290,7 +354,7 @@ with tab1:
             convert_button = st.button("Convert!")
             if convert_button:
                 st.write("Button Clicked!")
-                text_chunks = pdf_to_text(document)
+                text_chunks = pdf_to_chunk(document)
                 # Create the full text content
                 full_text = '\n\n'.join(text_chunks)
                 # Split the full text into manageable chunks
@@ -329,10 +393,9 @@ with tab1:
             convert_button = st.button("Convert!")
             if convert_button:
                 st.write("Button Clicked!")
-                text_chunks = pdf_to_docx(document)
+                full_text = pdf_to_bionic_text(document)
                 # Create the full text content
-                full_text = ' '.join(text_chunks)
-                # Split the full text into manageable chunks
+                #full_text = ' '.join(text_chunks)
                 # Generate the DOCX file
                 docx_file = generate_docx(full_text)
                 text_segments = split_for_claude(full_text, max_tokens=200000)
