@@ -228,6 +228,7 @@ def pdf_to_chunk(file, text_path=None):
 
 def pdf_to_bionic_text(file, text_path=None):
     reader = pypdf.PdfReader(file)
+    all_text = []
     # Process each page and extract the text
     for page_num in range(len(reader.pages)):
         # Extract text from page
