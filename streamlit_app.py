@@ -238,7 +238,7 @@ def pdf_to_bionic_text(file, text_path=None):
         # Clean and format text
         paragraphs = clean_text(text)
         for para in paragraphs:
-            all_text.extend(para)
+            all_text.append(para)
 
     # return to a text file
     with open("Output.txt", "w") as text_file:
