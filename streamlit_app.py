@@ -3,7 +3,7 @@ import pypdf
 import re
 import os
 import anthropic
-from transformers import GPT2Tokenizer
+#from transformers import GPT2Tokenizer
 import time
 from io import BytesIO
 from docx import Document
